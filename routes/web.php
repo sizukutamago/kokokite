@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TopController@showTop');
+
+Route::get('/{id}', 'MainController@showMain');
