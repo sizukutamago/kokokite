@@ -14,3 +14,5 @@
 Route::get('/', 'TopController@showTop');
 
 Route::get('/{id}', 'MainController@showMain');
+
+Route::get('/{id}/pusher' , 'MainController@push');
