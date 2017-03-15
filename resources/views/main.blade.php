@@ -6,9 +6,7 @@
 
 @section('content')
 
-    <div id="map">
-
-    </div>
+    <div id="map"></div>
 
     <div class="chat">
         <input type="button" value="push" onclick='push()'>

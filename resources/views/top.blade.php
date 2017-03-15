@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <p>a</p>
+    <a href="/create_room">ルームを作成</a>
 
 @endsection
