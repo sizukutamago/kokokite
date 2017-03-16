@@ -4,12 +4,6 @@
     </IfModule>
 
     RewriteEngine On
-    
-    # Force HTTPS
-    RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP:X-Forwarded-Proto} !=https
-    RewriteRule ^/?(.*) https://%{HTTP_HOST}/$1 [R,L]
-
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
