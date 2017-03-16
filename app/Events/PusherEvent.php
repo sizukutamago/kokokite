@@ -27,6 +27,8 @@ class PusherEvent extends Event implements ShouldBroadcast
     {
         $this->channel_id = $channel_id;
         $this->location = $location;
+
+        dd($channel_id);
     }
 
     /**
