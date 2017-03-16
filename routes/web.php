@@ -13,8 +13,14 @@
 
 Route::get('/', 'TopController@showTop');
 
-Route::get('/create_room', 'TopController@createRoom');
+Route::get('/create_room', 'TopController@showCreateRoom');
+
+Route::post('/create_room', 'TopController@createRoom');
 
 Route::get('/{id}', 'MainController@showMain');
 
 Route::get('/{id}/pusher' , 'MainController@push');
+
+Route::get('/{id}/push', 'MainController@push_latlng');
+
+Route::get('/{id}/done', 'MainController@done');

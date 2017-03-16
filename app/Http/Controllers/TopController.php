@@ -16,8 +16,28 @@ class TopController extends Controller
     }
 
 
-    function createRoom(){
+    function showCreateRoom(){
         return view('createroom');
+    }
+
+    function createRoom(Request $r)
+    {
+        $room_id = 0;
+
+        while (true) {
+            $room_id = $this->makeRandStr(25);
+            $cnt = DB::table('rooms')->where('room_id', $room_id)->where('delete_flag', '0')->count();
+
+            if($cnt == 0){
+                break;
+            }
+        }
+
+        DB::table('rooms')->insert(
+            ['room_id' => $room_id , 'lat' => $r->lat, 'lon' => $r->lon]
+        );
+
+        return view('roomshare', compact('room_id'));
     }
 
     /**
@@ -32,9 +52,6 @@ class TopController extends Controller
         }
         return $r_str;
 
-        while (true) {
-            $room_id = $this->makeRandStr(25);
-        }
     }
 
 }
