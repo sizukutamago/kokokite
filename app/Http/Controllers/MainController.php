@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Events\PusherEvent;
+use App\Events\ChatEvent;
 use DB;
 
 class MainController extends Controller
@@ -13,7 +14,8 @@ class MainController extends Controller
 
         $r = DB::table('rooms')->where('room_id', $id)->where('delete_flag', '0')->first();
 
-        if(count($r) == 0){
+        if(count($r) == 0)
+        {
             return redirect('/');
         }
 
@@ -26,6 +28,11 @@ class MainController extends Controller
     function push($id)
     {
         event(new PusherEvent('こんにちわ!', $id));
+    }
+
+    function push_chat(Request $r, $id)
+    {
+        event(new ChatEvent($r->chat, $id));
     }
 
     function push_latlng(Request $r, $id)

@@ -23,4 +23,6 @@ Route::get('/{id}/pusher' , 'MainController@push');
 
 Route::get('/{id}/push', 'MainController@push_latlng');
 
+Route::get('/{id}/chat', 'MainController@push_chat');
+
 Route::get('/{id}/done', 'MainController@done');

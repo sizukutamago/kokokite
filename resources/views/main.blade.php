@@ -9,11 +9,13 @@
     <div id="map"></div>
 
     <div class="chat">
-        <input type="button" value="push" onclick='push()'>
+        <div id="error_message"></div>
+        <input type="text" value="" id="chatText" >
+        <input type="button" value="push" onclick='push_chat()'>
         <ul id="messages"></ul>
     </div>
 
-    <input type="button" value="迷子の人はこのボタン" onclick="start()">
+    <input id="maigo" type="button" value="迷子の人はこのボタン" onclick="start()">
     <a href="/{{ $id }}/done">案内完了!</a>
 
 @endsection
@@ -32,11 +34,20 @@
             encrypted: true
         });
 
+        var pusher2 = new Pusher( '{{ env('PUSHER_KEY') }}' , {
+            encrypted: true
+        });
+
         //LaravelのEventクラスで設定したチャンネル名
         var channel = pusher.subscribe('{{ $id }}');
 
+        //LaravelのEventクラスで設定したチャンネル名
+        var channel2 = pusher2.subscribe('{{ $id }}');
+
         //Laravelのクラス
         channel.bind('App\\Events\\PusherEvent', addMarker);
+
+        channel2.bind('App\\Events\\ChatEvent', addChat);
 
         function push(){
             $.get('/{{ $id }}/pusher');
@@ -53,13 +64,34 @@
             );
         }
 
+        function push_chat() {
+
+            var chat = document.getElementById('chatText').value;
+            if(chat == ''){
+                document.getElementById('error_message').innerHTML = '入力してね';
+            }else {
+                document.getElementById('error_message').innerHTML = '';
+                document.getElementById('chatText').value = '';
+
+                $.get(
+                        "/{{ $id }}/chat",
+                        {
+                            "chat": chat
+                        }
+                );
+            }
+        }
+
         function addMarker(data) {
+
+            if($('#maigo') != null)
+            {
+                $('#maigo').remove();
+            }
 
             var lat = data['location']["lat"];
 
             var lng = data['location']["lng"];
-
-            console.log('a');
 
             // 中心の位置座標を指定する
             var latlng = new google.maps.LatLng(lat, lng);
@@ -79,6 +111,10 @@
                 // マーカーの場所を変更
                 maigo_marker.setPosition(latlng);
             }
+        }
+
+        function addChat(data) {
+            $('#messages').prepend('<li>' + data.chat + '</li>');
         }
 
     </script>
