@@ -22,9 +22,17 @@ function get_current_location()
     // Geolocation APIに対応している
     if( navigator.geolocation )
     {
+
+        //getCurrentPositionのオプション設定
+        var optionObj = {
+            "enableHighAccuracy": true,
+            "timeout": 10000,
+            "maximumAge": 5000,
+        };
+
         // 現在位置を取得できる場合の処理
         // 現在位置を取得する
-        navigator.geolocation.getCurrentPosition( successFunc , errorFunc ) ;
+        navigator.geolocation.getCurrentPosition( successFunc , errorFunc , optionObj ) ;
 
     }
 
@@ -130,6 +138,7 @@ function addFormSubmit(lat, lon)
         var input = document.createElement('input');
 
         input.setAttribute('id', 'addSubmit');
+        input.setAttribute('class', 'addButton');
         input.setAttribute('type', 'submit');
         input.setAttribute('value', '部屋を作成');
 

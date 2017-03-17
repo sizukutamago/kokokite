@@ -6,18 +6,26 @@
 
 @section('content')
 
-    <div id="map"></div>
+    <div class="box_area">
+        <div class="box">
+            <div id="map"></div>
 
-    <div class="chat">
-        <div id="error_message"></div>
-        <input type="text" value="" id="chatText" >
-        <input type="button" value="push" onclick='push_chat()'>
-        <ul id="messages"></ul>
+            <div>
+                <input id="maigo" type="button" value="迷子の人は押してね!" onclick="start()">
+                <a href="/{{ $id }}/done"><input type="button" value="案内完了!"></a>
+            </div>
+
+            <div class="chat">
+                <ul id="messages"></ul>
+            </div>
+            <div>
+                <div id="error_message"></div>
+                <input type="text" value="" id="chatText" >
+                <input type="button" value="送信" onclick='push_chat()'>
+
+            </div>
+        </div>
     </div>
-
-    <input id="maigo" type="button" value="迷子の人はこのボタン" onclick="start()">
-    <a href="/{{ $id }}/done">案内完了!</a>
-
 @endsection
 
 
@@ -114,9 +122,9 @@
         }
 
         function addChat(data) {
-            $('#messages').prepend('<li>' + data.chat + '</li>');
+            $('#messages').prepend('<li id="balloon-5-bottom-right">' + data.chat + '</li>');
+            $('#messages').prepend('<div style="clear: both; height: 3px"></div>');
         }
 
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 @endsection

@@ -34,8 +34,8 @@ function start() {
 
         //getCurrentPositionのオプション設定
         var optionObj = {
-            "enableHighAccuracy": false,
-            "timeout": 8000,
+            "enableHighAccuracy": true,
+            "timeout": 10000,
             "maximumAge": 5000,
         };
 
