@@ -17,7 +17,7 @@ var map = new google.maps.Map( canvas, mapOptions ) ;
 //マーカーオプション
 var markerOptions = {
     map: map,
-    position: latlng
+    position: latlng,
 };
 
 var marker = new google.maps.Marker(markerOptions);
